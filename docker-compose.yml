@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+
+  treadmill:
+   container_name: treadmill
+   build:
+    context: .
+    dockerfile: Dockerfile
+   volumes:
+     - "./src:/go/src"
+     - "./.aws:/root/.aws"
+   environment:
+    - TREADMILL_REG=${TREADMILL_REG}
+    - TREADMILL_BUC=${TREADMILL_BUC}
+    - TREADMILL_ENV=${TREADMILL_ENV}
+   ports:
+    - "9999:9999"
+   command: "go run main.go"
